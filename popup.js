@@ -47,6 +47,7 @@ const elements = {
   list: document.querySelector(".blocked-list"),
   currentHost: document.querySelector(".current-host"),
   addCurrent: document.querySelector(".add-current"),
+  blockedCount: document.querySelector(".blocked-count"),
 };
 
 let currentHost = "";
@@ -70,9 +71,11 @@ function parseHost(input) {
 }
 
 function render(state) {
+  document.body.setAttribute("data-enabled", String(state.enabled));
   elements.toggle.setAttribute("aria-pressed", String(state.enabled));
 
   const blockedHosts = state.blockedHosts.map((host) => normalizeHost(host));
+  const filteredHosts = blockedHosts.filter(Boolean);
   const normalizedCurrent = normalizeHost(currentHost);
   const canAddCurrent =
     normalizedCurrent &&
@@ -83,13 +86,10 @@ function render(state) {
     ? `Current: ${normalizedCurrent}`
     : "No active site";
   elements.addCurrent.disabled = !canAddCurrent;
+  elements.blockedCount.textContent = String(filteredHosts.length);
 
   elements.list.innerHTML = "";
-  blockedHosts.forEach((host) => {
-    if (!host) {
-      return;
-    }
-
+  filteredHosts.forEach((host) => {
     const item = document.createElement("li");
     item.className = "blocked-item";
 

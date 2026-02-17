@@ -8,29 +8,42 @@
   </head>
   <body>
     <main class="popup">
-      <button class="toggle" type="button" aria-pressed="false">
-        BLOCK
-      </button>
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">OffSite</p>
+          <h1>Block distractions</h1>
+          <p class="hero-caption">Control distracting sites in one place.</p>
+        </div>
+        <button class="toggle" type="button" aria-pressed="false">BLOCK</button>
+      </header>
 
-      <form class="add-form" autocomplete="off">
-        <input
-          class="host-input"
-          type="text"
-          name="host"
-          placeholder="example.com"
-          aria-label="Add blocked site"
-        />
-        <button class="add-button" type="submit">Add</button>
-      </form>
+      <section class="panel">
+        <form class="add-form" autocomplete="off">
+          <input
+            class="host-input"
+            type="text"
+            name="host"
+            placeholder="example.com"
+            aria-label="Add blocked site"
+          />
+          <button class="add-button" type="submit">Add</button>
+        </form>
+      </section>
 
-      <div class="current-site">
+      <section class="panel current-site">
         <span class="current-host" aria-live="polite">No active site</span>
         <button class="add-current" type="button" disabled>
           Add current site
         </button>
-      </div>
+      </section>
 
-      <ul class="blocked-list" aria-label="Blocked sites"></ul>
+      <section class="panel list-panel">
+        <div class="list-header">
+          <h2 class="list-title">Blocked sites</h2>
+          <span class="blocked-count" aria-live="polite">0</span>
+        </div>
+        <ul class="blocked-list" aria-label="Blocked sites"></ul>
+      </section>
     </main>
     <script src="popup.js"></script>
   </body>
